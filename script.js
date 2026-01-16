@@ -1,15 +1,29 @@
-// Fungsi untuk pindah halaman
+// Fungsi buka hadiah (halaman pembuka)
+function bukaHadiah() {
+    const cover = document.getElementById('opening');
+    const isi = document.getElementById('konten-utama');
+
+    cover.style.opacity = '0';
+    
+    setTimeout(function() {
+        cover.style.display = 'none';
+        isi.style.display = 'block';
+    }, 1000);
+}
+
+// Fungsi pindah halaman
 function nextPage(pageNumber) {
-    // Sembunyikan halaman saat ini
     const currentPages = document.querySelectorAll('.page');
     currentPages.forEach(page => page.classList.remove('active'));
     
-    // Tampilkan halaman tujuan
     const nextPage = document.getElementById(`page${pageNumber}`);
     nextPage.classList.add('active');
+    
+    // Scroll ke atas
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Fungsi Tiup Lilin
+// Fungsi tiup lilin
 function blowCandle() {
     const flame = document.getElementById('flame');
     const wishText = document.getElementById('wish-text');
@@ -17,16 +31,16 @@ function blowCandle() {
 
     // Matikan api
     flame.style.display = 'none';
-    wishText.innerText = "Yey! Lilin sudah mati 💨";
+    wishText.innerText = "Yeay! Lilinnya sudah mati 💨✨";
     
     // Tampilkan pesan terakhir
-    finalMsg.style.display = 'block';
-    
-    // Jalankan confetti
-    startConfetti();
+    setTimeout(() => {
+        finalMsg.style.display = 'block';
+        startConfetti();
+    }, 500);
 }
 
-// --- LOGIKA CONFETTI (Efek Kertas) ---
+// Efek confetti
 function startConfetti() {
     const canvas = document.getElementById('confetti');
     const ctx = canvas.getContext('2d');
@@ -34,24 +48,27 @@ function startConfetti() {
     canvas.height = window.innerHeight;
 
     let particles = [];
-    const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
+    const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f7b731', '#5f27cd', '#ff9ff3'];
 
-    for(let i=0; i<200; i++) {
+    for(let i = 0; i < 150; i++) {
         particles.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height - canvas.height,
             color: colors[Math.floor(Math.random() * colors.length)],
-            size: Math.random() * 5 + 5,
-            speed: Math.random() * 3 + 2,
+            size: Math.random() * 8 + 3,
+            speedY: Math.random() * 3 + 2,
+            speedX: Math.random() * 2 - 1,
             angle: Math.random() * 360
         });
     }
 
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
         particles.forEach(p => {
-            p.y += p.speed;
-            p.angle += 2;
+            p.y += p.speedY;
+            p.x += p.speedX;
+            p.angle += 3;
             
             ctx.fillStyle = p.color;
             ctx.save();
@@ -60,9 +77,15 @@ function startConfetti() {
             ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
             ctx.restore();
 
-            if(p.y > canvas.height) p.y = -10; // Reset ke atas
+            // Reset ke atas kalau sudah sampai bawah
+            if(p.y > canvas.height) {
+                p.y = -10;
+                p.x = Math.random() * canvas.width;
+            }
         });
+        
         requestAnimationFrame(draw);
     }
+    
     draw();
-        }
+}
