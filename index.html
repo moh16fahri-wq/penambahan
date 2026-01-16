@@ -14,7 +14,7 @@
         <div class="emoji">💌</div>
         <h1>Hai Sayang! ❤️</h1>
         <p>Aku punya sesuatu spesial buat kamu...</p>
-        <button class="btn" onclick="bukaHadiah()">Buka Kejutan 🎁</button>
+        <button class="btn" id="btnBuka">Buka Kejutan 🎁</button>
     </div>
 
     <!-- CANVAS CONFETTI -->
@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            <button class="btn" onclick="nextPage(2)">Lanjut 💕</button>
+            <button class="btn" id="btnPage2">Lanjut 💕</button>
         </div>
 
         <!-- PAGE 2: SURAT -->
@@ -66,7 +66,7 @@
                 <div class="sign">- Yang Sayang Kamu -</div>
             </div>
 
-            <button class="btn" onclick="nextPage(3)">Lanjut Lagi 🎂</button>
+            <button class="btn" id="btnPage3">Lanjut Lagi 🎂</button>
         </div>
 
         <!-- PAGE 3: KUE ULANG TAHUN -->
@@ -75,7 +75,7 @@
             <p>Tutup mata, buat wish, lalu klik kuenya untuk tiup lilin!</p>
 
             <div class="cake-section">
-                <div class="cake-container" onclick="blowCandle()">
+                <div class="cake-container" id="cakeBtn">
                     <div class="cake">
                         <div class="candle">
                             <div class="flame" id="flame"></div>
