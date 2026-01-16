@@ -1,99 +1,146 @@
-/* style.css */
-
 body {
-    background-color: #ffe6e6; /* Latar belakang Pink lembut */
-    font-family: 'Arial', sans-serif;
-    text-align: center;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-}
-
-/* TAMPILAN PEMBUKA (COVER) */
-#opening {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, #ff9a9e, #fecfef);
+    background: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
-    transition: opacity 1s ease-out;
+    overflow: hidden;
+    color: #444;
 }
 
-#opening h1 {
-    color: white;
-    font-size: 2.5rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-    margin-bottom: 10px;
-}
-
-/* TOMBOL */
-button {
-    background-color: white;
-    color: #ff6b6b;
-    border: none;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    font-weight: bold;
-    transition: transform 0.2s;
-}
-
-button:hover {
-    transform: scale(1.1); /* Efek membesar saat ditekan */
-}
-
-/* KONTEN UTAMA */
-#konten-utama {
-    display: none; /* Disembunyikan saat awal */
-    padding: 20px;
-    padding-bottom: 50px;
-    animation: munculPelan 2s;
-}
-
-h2 {
-    color: #ff6b6b;
-    margin-top: 20px;
-}
-
-/* GALERI FOTO */
-.gallery {
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    width: 90%;
+    max-width: 400px;
+    height: 80vh; /* Tinggi kartu */
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    position: relative;
+    overflow-y: auto; /* Bisa scroll kalau teks panjang */
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
 }
 
-.photo-card {
-    background: white;
-    padding: 10px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    width: 80%;
-    max-width: 300px;
-}
-
-.photo-card img {
+/* Mengatur Halaman (Page) */
+.page {
+    display: none; /* Sembunyikan semua halaman */
     width: 100%;
-    border-radius: 10px;
+    animation: fadeIn 0.8s ease;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
-.photo-card p {
-    color: #ff6b6b;
-    font-weight: bold;
-    margin-top: 10px;
+.page.active {
+    display: flex; /* Tampilkan halaman aktif */
 }
 
-/* ANIMASI */
-@keyframes munculPelan {
+@keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+h1, h2 {
+    color: #d63384;
+    font-family: 'Indie Flower', cursive;
+}
+
+.envelope { font-size: 80px; margin-bottom: 20px; animation: bounce 2s infinite; }
+
+.btn {
+    background: #d63384;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
+    transition: transform 0.2s;
+}
+.btn:hover { transform: scale(1.05); }
+
+/* Style Galeri Foto */
+.gallery {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+.photo-card {
+    background: white;
+    padding: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transform: rotate(-5deg);
+}
+.photo-card:nth-child(2) { transform: rotate(5deg); }
+.photo-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.photo-card p { font-size: 10px; margin-top: 5px; color: #777; }
+
+/* Style Surat */
+.letter-content {
+    text-align: justify;
+    background: #fff0f5;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px dashed #d63384;
+    font-size: 14px;
+    line-height: 1.6;
+}
+.sign {
+    text-align: right;
+    font-weight: bold;
+    color: #d63384;
+    font-family: 'Indie Flower', cursive;
+    font-size: 18px;
+}
+
+/* Style Kue */
+.cake-container { margin: 30px 0; cursor: pointer; }
+.cake {
+    width: 100px; height: 80px; background: #f8a5c2;
+    border-radius: 10px 10px 0 0; position: relative;
+    box-shadow: inset 0 -10px rgba(0,0,0,0.1);
+}
+.cake::before {
+    content: ''; position: absolute; top: 15px; left: -10px;
+    width: 120px; height: 20px; background: #c44569;
+    border-radius: 10px;
+}
+.candle {
+    width: 10px; height: 30px; background: #fff;
+    position: absolute; top: -30px; left: 45px;
+}
+.flame {
+    width: 15px; height: 25px; background: orange;
+    border-radius: 50% 50% 20% 20%;
+    position: absolute; top: -20px; left: -2.5px;
+    animation: flicker 0.5s infinite alternate;
+}
+@keyframes flicker {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.hidden-message { display: none; margin-top: 20px; }
+
+/* Confetti Canvas */
+#confetti {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 99;
+                      }
+    
