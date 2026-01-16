@@ -4,153 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Untuk Kamu ❤️</title>
-    <style>
-        /* GAYA UNTUK HALAMAN */
-        body {
-            background-color: #ffe6e6; /* Pink lembut */
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
-        /* 1. BAGIAN PEMBUKA (COVER) */
-        #opening {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, #ff9a9e, #fecfef);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 1s ease-out;
-        }
-
-        #opening h1 {
-            color: white;
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        button {
-            background-color: white;
-            color: #ff6b6b;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            font-weight: bold;
-            transition: transform 0.2s;
-        }
-
-        button:hover {
-            transform: scale(1.1); /* Efek membesar saat disentuh */
-        }
-
-        /* 2. BAGIAN UTAMA (GALERI & KONTEN) */
-        #konten-utama {
-            display: none; /* Disembunyikan dulu */
-            padding: 20px;
-            animation: munculPelan 2s;
-        }
-
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .photo-card {
-            background: white;
-            padding: 10px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 80%; /* Agar pas di HP */
-            max-width: 300px;
-        }
-
-        .photo-card img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .photo-card p {
-            color: #ff6b6b;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        /* Animasi Muncul */
-        @keyframes munculPelan {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Indie+Flower&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- HALAMAN PEMBUKA -->
     <div id="opening">
+        <div class="emoji">💌</div>
         <h1>Hai Sayang! ❤️</h1>
-        <p style="color: white; font-size: 1.2rem;">Aku punya sesuatu buat kamu...</p>
-        <br>
-        <button onclick="bukaHadiah()">Buka Kejutan 🎁</button>
+        <p>Aku punya sesuatu spesial buat kamu...</p>
+        <button class="btn" onclick="bukaHadiah()">Buka Kejutan 🎁</button>
     </div>
 
-    <div id="konten-utama">
-        <h2>Our Memories 📸</h2>
-        <p>Setiap momen sama kamu itu berharga banget.</p>
+    <!-- CANVAS CONFETTI -->
+    <canvas id="confetti"></canvas>
 
-        <div class="gallery">
-            
-            <div class="photo-card">
-                <img src="IMG-20251025-WA0021.jpg" alt="Foto Kita 1">
-                <p>Awal ketemu ❤️</p>
+    <!-- KONTEN UTAMA -->
+    <div class="container" id="konten-utama">
+        
+        <!-- PAGE 1: GALERI FOTO -->
+        <div class="page active" id="page1">
+            <h2>Our Memories 📸</h2>
+            <p>Setiap momen sama kamu itu berharga banget.</p>
+
+            <div class="gallery">
+                <div class="photo-card">
+                    <img src="IMG-20251025-WA0021.jpg" alt="Foto Kita 1" onerror="this.src='https://via.placeholder.com/200x200/ffb3ba/ff6b6b?text=Foto+1'">
+                    <p>Awal ketemu ❤️</p>
+                </div>
+
+                <div class="photo-card">
+                    <img src="foto2.jpg" alt="Foto Kita 2" onerror="this.src='https://via.placeholder.com/200x200/bae1ff/6b9aff?text=Foto+2'">
+                    <p>Momen Lucu 😂</p>
+                </div>
+
+                <div class="photo-card">
+                    <img src="foto3.jpg" alt="Foto Kita 3" onerror="this.src='https://via.placeholder.com/200x200/ffffba/ffeb6b?text=Foto+3'">
+                    <p>Kenangan Manis 🥰</p>
+                </div>
             </div>
 
-            <div class="photo-card">
-                <img src="foto2.jpg" alt="Foto Kita 2">
-                <p>Momen Lucu 😂</p>
-            </div>
-
+            <button class="btn" onclick="nextPage(2)">Lanjut 💕</button>
         </div>
 
-        <br><br>
-        <hr style="border: 1px dashed #ff6b6b; width: 50%;">
-        <br>
+        <!-- PAGE 2: SURAT -->
+        <div class="page" id="page2">
+            <h2>Surat Untuk Kamu 💌</h2>
+            
+            <div class="letter-content">
+                <p>Hai Sayang,</p>
+                <br>
+                <p>Di hari spesial ini, aku cuma mau bilang terima kasih udah jadi bagian terpenting dalam hidup aku. Kamu selalu bikin hari-hari aku lebih berwarna, lebih berarti.</p>
+                <br>
+                <p>Setiap detik bareng kamu itu precious banget. Dari ketawa-ketawa konyol, sampai saat-saat serius, semuanya jadi kenangan yang nggak akan pernah aku lupain.</p>
+                <br>
+                <p>Semoga di tahun ini kamu selalu sehat, bahagia, dan semua impian kamu tercapai. Aku akan selalu ada di samping kamu, apapun yang terjadi.</p>
+                <br>
+                <p>I love you more than words can say ❤️</p>
+                
+                <div class="sign">- Yang Sayang Kamu -</div>
+            </div>
 
-        <h3>Siap-siap tiup lilin ya... 🎂</h3>
-        <p>(Codingan kue nanti ditaruh di bawah sini)</p>
+            <button class="btn" onclick="nextPage(3)">Lanjut Lagi 🎂</button>
+        </div>
+
+        <!-- PAGE 3: KUE ULANG TAHUN -->
+        <div class="page" id="page3">
+            <h2>Waktunya Tiup Lilin! 🎂</h2>
+            <p>Tutup mata, buat wish, lalu klik kuenya untuk tiup lilin!</p>
+
+            <div class="cake-section">
+                <div class="cake-container" onclick="blowCandle()">
+                    <div class="cake">
+                        <div class="candle">
+                            <div class="flame" id="flame"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="wish-text" id="wish-text">
+                    Klik kue untuk tiup lilin! 🕯️
+                </div>
+            </div>
+
+            <div class="hidden-message" id="final-msg">
+                <h3>🎉 HAPPY BIRTHDAY SAYANG! 🎉</h3>
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    Yeay! Kamu sudah semakin dewasa! 🎊<br>
+                    Semoga tahun ini penuh dengan kebahagiaan, kesuksesan, dan hal-hal indah lainnya. 
+                    <br><br>
+                    Aku bangga sama kamu dan akan selalu support kamu! 💪❤️
+                    <br><br>
+                    <strong style="color: #d63384; font-size: 1.3rem;">I LOVE YOU SO MUCH! 💖</strong>
+                </p>
+            </div>
+        </div>
 
     </div>
 
-    <script>
-        function bukaHadiah() {
-            var cover = document.getElementById('opening');
-            var isi = document.getElementById('konten-utama');
-
-            // Efek memudar
-            cover.style.opacity = '0';
-            
-            // Tunggu sebentar lalu hilangkan cover dan munculkan isi
-            setTimeout(function() {
-                cover.style.display = 'none';
-                isi.style.display = 'block';
-                
-                // DISINI BISA TARUH KODE PLAY MUSIK KALAU MAU
-            }, 1000);
-        }
-    </script>
-
+    <script src="script.js"></script>
 </body>
-  </html>
-  
+</html>
