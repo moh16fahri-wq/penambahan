@@ -88,4 +88,4 @@ function startConfetti() {
     }
     
     draw();
-}
+        }
