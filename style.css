@@ -1,45 +1,84 @@
-body {
+* {
     margin: 0;
     padding: 0;
-    background: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
+    box-sizing: border-box;
+}
+
+body {
     font-family: 'Poppins', sans-serif;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    color: #444;
+    background: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
+    overflow-x: hidden;
 }
 
-.container {
-    background: rgba(255, 255, 255, 0.9);
-    width: 90%;
-    max-width: 400px;
-    height: 80vh; /* Tinggi kartu */
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-    position: relative;
-    overflow-y: auto; /* Bisa scroll kalau teks panjang */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    text-align: center;
-}
-
-/* Mengatur Halaman (Page) */
-.page {
-    display: none; /* Sembunyikan semua halaman */
+/* HALAMAN PEMBUKA */
+#opening {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    animation: fadeIn 0.8s ease;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     height: 100%;
+    background: linear-gradient(to bottom, #ff9a9e, #fecfef);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s ease-out;
+}
+
+#opening h1 {
+    color: white;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    margin-bottom: 10px;
+    font-family: 'Indie Flower', cursive;
+}
+
+#opening p {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.btn {
+    background: white;
+    color: #ff6b6b;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+
+/* CONTAINER UTAMA */
+.container {
+    display: none;
+    min-height: 100vh;
+    padding: 20px;
+    animation: fadeIn 1s ease;
+}
+
+.page {
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    max-width: 500px;
+    margin: 20px auto;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    text-align: center;
+    animation: fadeIn 0.8s ease;
 }
 
 .page.active {
-    display: flex; /* Tampilkan halaman aktif */
+    display: block;
 }
 
 @keyframes fadeIn {
@@ -47,100 +86,191 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-h1, h2 {
+h2 {
     color: #d63384;
     font-family: 'Indie Flower', cursive;
+    font-size: 2rem;
+    margin-bottom: 20px;
 }
 
-.envelope { font-size: 80px; margin-bottom: 20px; animation: bounce 2s infinite; }
-
-.btn {
-    background: #d63384;
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 50px;
-    font-size: 16px;
-    margin-top: 20px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
-    transition: transform 0.2s;
-}
-.btn:hover { transform: scale(1.05); }
-
-/* Style Galeri Foto */
+/* GALERI FOTO */
 .gallery {
     display: flex;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 15px;
     justify-content: center;
-    margin: 20px 0;
+    margin: 30px 0;
 }
+
 .photo-card {
     background: white;
-    padding: 5px;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transform: rotate(-5deg);
-}
-.photo-card:nth-child(2) { transform: rotate(5deg); }
-.photo-card img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-}
-.photo-card p { font-size: 10px; margin-top: 5px; color: #777; }
-
-/* Style Surat */
-.letter-content {
-    text-align: justify;
-    background: #fff0f5;
-    padding: 15px;
+    padding: 10px;
     border-radius: 10px;
-    border: 1px dashed #d63384;
-    font-size: 14px;
-    line-height: 1.6;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    width: 100%;
+    max-width: 200px;
+    transition: transform 0.3s;
 }
+
+.photo-card:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
+.photo-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #f3e7e9 0%, #e3eeff 100%);
+}
+
+.photo-card p {
+    color: #ff6b6b;
+    font-weight: 600;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+/* SURAT */
+.letter-content {
+    text-align: left;
+    background: #fff8f0;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px dashed #d63384;
+    line-height: 1.8;
+    margin: 20px 0;
+    font-size: 0.95rem;
+}
+
 .sign {
     text-align: right;
     font-weight: bold;
     color: #d63384;
     font-family: 'Indie Flower', cursive;
-    font-size: 18px;
+    font-size: 1.3rem;
+    margin-top: 20px;
 }
 
-/* Style Kue */
-.cake-container { margin: 30px 0; cursor: pointer; }
-.cake {
-    width: 100px; height: 80px; background: #f8a5c2;
-    border-radius: 10px 10px 0 0; position: relative;
-    box-shadow: inset 0 -10px rgba(0,0,0,0.1);
+/* KUE ULANG TAHUN */
+.cake-section {
+    margin: 40px 0;
 }
+
+.cake-container {
+    position: relative;
+    display: inline-block;
+    margin: 30px auto;
+    cursor: pointer;
+}
+
+.cake {
+    width: 120px;
+    height: 100px;
+    background: linear-gradient(to bottom, #f8a5c2 0%, #f78ca0 100%);
+    border-radius: 10px 10px 0 0;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
 .cake::before {
-    content: ''; position: absolute; top: 15px; left: -10px;
-    width: 120px; height: 20px; background: #c44569;
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: -15px;
+    width: 150px;
+    height: 25px;
+    background: linear-gradient(to bottom, #c44569 0%, #b23555 100%);
     border-radius: 10px;
 }
+
+.cake::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: -15px;
+    width: 150px;
+    height: 20px;
+    background: #8b3a62;
+    border-radius: 0 0 10px 10px;
+}
+
 .candle {
-    width: 10px; height: 30px; background: #fff;
-    position: absolute; top: -30px; left: 45px;
+    width: 12px;
+    height: 40px;
+    background: linear-gradient(to bottom, #fff 0%, #f0f0f0 100%);
+    position: absolute;
+    top: -40px;
+    left: 54px;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
+
 .flame {
-    width: 15px; height: 25px; background: orange;
+    width: 20px;
+    height: 30px;
+    background: radial-gradient(circle, #ffff00 0%, #ff6600 60%, #ff0000 100%);
     border-radius: 50% 50% 20% 20%;
-    position: absolute; top: -20px; left: -2.5px;
-    animation: flicker 0.5s infinite alternate;
+    position: absolute;
+    top: -28px;
+    left: -4px;
+    animation: flicker 0.3s infinite alternate;
+    box-shadow: 0 0 15px rgba(255, 153, 0, 0.8);
 }
+
 @keyframes flicker {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(1.1); opacity: 0.8; }
+    0% { transform: scale(1) translateY(0); }
+    100% { transform: scale(1.1) translateY(-2px); }
 }
 
-.hidden-message { display: none; margin-top: 20px; }
+.wish-text {
+    margin: 20px 0;
+    font-size: 1.1rem;
+    color: #d63384;
+    font-weight: 600;
+}
 
-/* Confetti Canvas */
+.hidden-message {
+    display: none;
+    margin-top: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    border-radius: 15px;
+    animation: fadeIn 1s ease;
+}
+
+.hidden-message h3 {
+    color: #d63384;
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+/* CONFETTI CANVAS */
 #confetti {
-    position: absolute; top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none; z-index: 99;
-                      }
-    
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* EMOJI ANIMASI */
+.emoji {
+    font-size: 3rem;
+    margin: 20px 0;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+hr {
+    border: none;
+    border-top: 2px dashed #ff6b6b;
+    margin: 30px 0;
+    }
