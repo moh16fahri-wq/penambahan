@@ -1,14 +1,49 @@
+// Tunggu sampai halaman selesai dimuat
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Tombol Buka Kejutan
+    const btnBuka = document.getElementById('btnBuka');
+    if (btnBuka) {
+        btnBuka.addEventListener('click', bukaHadiah);
+    }
+    
+    // Tombol ke Page 2
+    const btnPage2 = document.getElementById('btnPage2');
+    if (btnPage2) {
+        btnPage2.addEventListener('click', function() {
+            nextPage(2);
+        });
+    }
+    
+    // Tombol ke Page 3
+    const btnPage3 = document.getElementById('btnPage3');
+    if (btnPage3) {
+        btnPage3.addEventListener('click', function() {
+            nextPage(3);
+        });
+    }
+    
+    // Tombol Kue
+    const cakeBtn = document.getElementById('cakeBtn');
+    if (cakeBtn) {
+        cakeBtn.addEventListener('click', blowCandle);
+    }
+    
+});
+
 // Fungsi buka hadiah (halaman pembuka)
 function bukaHadiah() {
     const cover = document.getElementById('opening');
     const isi = document.getElementById('konten-utama');
 
-    cover.style.opacity = '0';
-    
-    setTimeout(function() {
-        cover.style.display = 'none';
-        isi.style.display = 'block';
-    }, 1000);
+    if (cover && isi) {
+        cover.style.opacity = '0';
+        
+        setTimeout(function() {
+            cover.style.display = 'none';
+            isi.style.display = 'block';
+        }, 1000);
+    }
 }
 
 // Fungsi pindah halaman
@@ -16,8 +51,10 @@ function nextPage(pageNumber) {
     const currentPages = document.querySelectorAll('.page');
     currentPages.forEach(page => page.classList.remove('active'));
     
-    const nextPage = document.getElementById(`page${pageNumber}`);
-    nextPage.classList.add('active');
+    const targetPage = document.getElementById('page' + pageNumber);
+    if (targetPage) {
+        targetPage.classList.add('active');
+    }
     
     // Scroll ke atas
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -29,13 +66,20 @@ function blowCandle() {
     const wishText = document.getElementById('wish-text');
     const finalMsg = document.getElementById('final-msg');
 
-    // Matikan api
-    flame.style.display = 'none';
-    wishText.innerText = "Yeay! Lilinnya sudah mati 💨✨";
+    if (flame) {
+        // Matikan api
+        flame.style.display = 'none';
+    }
+    
+    if (wishText) {
+        wishText.innerText = "Yeay! Lilinnya sudah mati 💨✨";
+    }
     
     // Tampilkan pesan terakhir
-    setTimeout(() => {
-        finalMsg.style.display = 'block';
+    setTimeout(function() {
+        if (finalMsg) {
+            finalMsg.style.display = 'block';
+        }
         startConfetti();
     }, 500);
 }
@@ -43,6 +87,8 @@ function blowCandle() {
 // Efek confetti
 function startConfetti() {
     const canvas = document.getElementById('confetti');
+    if (!canvas) return;
+    
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -65,7 +111,7 @@ function startConfetti() {
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        particles.forEach(p => {
+        particles.forEach(function(p) {
             p.y += p.speedY;
             p.x += p.speedX;
             p.angle += 3;
